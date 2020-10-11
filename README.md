@@ -2,47 +2,68 @@
 
 [![Discord](https://img.shields.io/discord/738864299392630914.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/UjzuHMU)
 
-# Important
+[![GitHub latest release version](https://img.shields.io/github/v/release/flybywiresim/a32nx.svg?style=flat)](https://github.com/flybywiresim/a32nx/releases/latest)
+[![Github All Releases download count](https://img.shields.io/github/downloads/flybywiresim/a32nx/total.svg?style=flat)](https://github.com/flybywiresim/a32nx/releases/latest)
+[![GitHub contributors](https://img.shields.io/github/contributors/flybywiresim/a32nx.svg?style=flat)](https://github.com/flybywiresim/a32nx/graphs/contributors)
+
+## About
+
+The A32NX Project is a community driven open source project to create a free Airbus A320neo in Microsoft Flight Simulator that is as close to reality as possible. It aims to enhance the default A320neo by improving the systems depth and functionality to bring it up to payware-level, all for free.
+
+## Downloads
+
+### A32NX Installer
+
+Download the new A32NX installer where you can select either the Stable or Developer build, and download and install the mod directly into your community folder, [download here.](https://github.com/Externoak/A32NX-installer/releases/latest/download/A32NX_Downloader.zip)
+
+### Traditional Download Methods
+
+#### Latest Stable Release
+
+This is the recommended stable release, as it has been thoroughly tested.
+
+[Download stable release here.](https://github.com/flybywiresim/a32nx/releases/latest/download/flybywiresim-a32nx.zip)
+
+You can see the changelog on the releases page: [View Here.](https://github.com/flybywiresim/a32nx/releases)
+
+#### Unstable Master Branch Build
+
+This has the latest features, but is much more unstable, use at your own risk.
+
+[Download developer build here.](https://github.com/flybywiresim/a32nx/releases/download/vmaster/A32NX-master.zip)
+
+[View info about the latest build here.](https://github.com/flybywiresim/a32nx/releases/tag/vmaster)
+
+## Installation
 
 ### Please follow ALL steps in this README if you encounter any issues with installation before seeking support.
 
-### The current master branch now contains a fix for the engine #1 shutoff bug, FCU mach bug, and PFD random shutoff bug introduced in the MSFS 1.8.3 update. Download [here](https://github.com/flybywiresim/a32nx/archive/master.zip).
+Open the zip that you downloaded from one of the links above, and drag the A32NX folder inside the zip into your Community folder.
 
-## About
-The A32NX Project is a community driven open source project to create a free Airbus A320neo in Microsoft Flight Simulator that is as close to reality as possible. It aims to enhance the default A320neo by improving the systems depth and functionality to bring it up to payware-level, all for free.
-
-Central Repository: https://github.com/flybywiresim/a32nx
-
-**IMPORTANT** The GitHub Master is now the dedicated Dev Build for the A32NX project. **No support will be provided for Developer Build issues**. If you are looking to install the stable version, please visit http://www.flybywiresim.com/a32nx.
-
-## Installation
-Installation is really simple. You only have to download the "A32NX" folder.
+See below for the location of your Community folder:
 
 For the Microsoft Store edition AND/OR Gamepass edition:
-* Copy the "A32NX" folder into your community package folder. It is located in:
+- Copy the "A32NX" folder into your community package folder. It is located in:
 `C:\Users\[YOUR USERNAME]\AppData\Local\Packages\Microsoft.FlightSimulator_<RANDOMLETTERS>\LocalCache\Packages\Community`.
 
 For the Steam edition:
-* Copy the "A32NX" folder into your community package folder. It is located in:
+- Copy the "A32NX" folder into your community package folder. It is located in:
 `C:\Users\[YOUR USERNAME]\AppData\Roaming\Microsoft Flight Simulator\Packages\Community`.
 
 For the Boxed edition:
-* Copy the "A32NX" folder into your community package folder. It is located in:
+- Copy the "A32NX" folder into your community package folder. It is located in:
 `C:\Users\[YOUR USERNAME]\AppData\Local\MSFSPackages\Community`.
 
-If the aforementioned methods do not work:
-* You can find your community folder by going into FS2020 general options and enabling developer mode. You will see a menu appear on top. Go to tools and virtual file system. Click on watch bases and your community folder will be listed in one of the folders.
-* Please make sure you're copying the "A32NX" folder into your community package folder, NOT the "flybywiresim-a32nx" folder.
+If the above methods do not work:
+- You can find your community folder by going into FS2020 general options and enabling developer mode. You will see a menu appear on top. Go to tools and virtual file system. Click on watch bases and your community folder will be listed in one of the folders.
+- Please make sure you're copying the "A32NX" folder into your community package folder, NOT the "flybywiresim-a32nx" folder.
 
 ## Contributing
 
 See [Contributing.md](.github/Contributing.md)
 
-## Changelog
+## Known Issues (Please note that most issues are being worked on and some of them may even be fixed in the master branch)
 
-See https://github.com/flybywiresim/a32nx/releases
-
-## Known Issues (Please note that most issues are being worked on and some of them may even be fixed in the dev branch)
 - Captain's PFD may occasionally turn off during flight
 - No Smoking switch doesn't use full range of motion.
 - F/CTL page does not have working speedbrake integration
@@ -54,7 +75,7 @@ See https://github.com/flybywiresim/a32nx/releases
 
 **Q: Can I download the aircraft in the current state?**
 
-A: Yes, the releases page contains the latest stable release. You can always download the dev version off the master branch, but keep in mind it is a WIP and will be unstable.
+A: Yes, see [Downloads](#Downloads).
 
 **Q: Where is the plane in-sim?**
 
@@ -62,11 +83,11 @@ A: The mod is added on top on the default A320neo from Asobo. If you want to uni
 
 **Q: What are the liveries available?**
 
-A: This project modifies the default A320 Neo from Asobo, therefore all liveries is compatible.
+A: This project modifies the default A320 Neo from Asobo, therefore all liveries should be compatible.
 
 **Q: When will it be released?**
 
-A: The project is an ongoing rolling release. You can download the latest stable version from released or the latest Developer version from the Master branch! (Developer version is classed as unstable and not advised)
+A: The project is an ongoing rolling release. See [Downloads](#Downloads).
 
 **Q: When is the next update?**
 
@@ -82,4 +103,4 @@ A: No, it is a completely free aircraft, open-source.
 
 **Q: How do we report bugs?**
 
-A: Report bugs to us in the Discord server, under the #help channel.
+A: Report bugs to us in the Discord server, under the #help channel, or by creating a GitHub issue. Just make sure to search for existing issues first before creating a new one.

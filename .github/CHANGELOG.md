@@ -20,6 +20,33 @@
 1. [ECAM] Improved lower engine ECAM - @lousybyte (lousybyte)
 1. [CDU] Add "Closest Airports" page - @lhoenig (Lukas Hoenig)
 1. [PFD] Fixed FD bars appearing on PFD when on the ground - @Curtis-VL (Curtis)
+1. [CDU] Added IRS Init page - @externoak (Externo)
+1. [OVHD] Implement additional overhead button/switch functionality (EMER ELEC, EVAC, air data switching, etc.) - @wpine215 (Iceman)
+1. [ECAM] Made open doors on DOOR/OXY page amber instead of green - @Benjozork (Benjamin Dupont)
+1. [PFD] Adjust vertical Flight Director offset - @veikkos (Veikko Soininen)
+1. [PFD] Fix Radio altimeter only updating every second - @lukecologne (luke)
+1. [Systems] Pitot heating should now be active while engines are running - @lousybyte (lousybyte)
+1. [TEXTURES] Higher resoloution Mainpanel, fixed glareshield texture error - @Pleasure0102 (Pleasure)
+1. [ECAM] Overhauled WHEEL Page - @Benjozork (Benjamin Dupont)
+1. [CDU] Add approach waypoints to DCT page - @lengyc0208 (lyc)
+1. [Sounds] Added 3D emitters for all sounds
+1. [Sounds] Added sounds for Evac horn, emer cabin call, mech horn, gear extend/retract, and cargo door - @hotshotp (Boris)
+1. [CDU] Revised blue, green and amber colors on CDU - @lucky38i (Lucky38i)
+1. [CDU] Revised INIT A & B Page - @lucky38i (Lucky38i)
+1. [CDU] Fixed certain STARs not showing on arrivals page - @tyler58546 (tyler58546)
+1. [CHECKLISTS] Added several situations from QRH to checklists - FBI#7771
+1. [ECAM] Fix ECAM wheel page being selected before all gears are downlocked - @lukecologne (luke)
+1. [MISC] Added standby instrument brightness adjustment and attitude reset - @2hwk (2Cas#1022 on discord)
+1. [MISC] Added standby instrument bugs page and corrected standby instrument font and behaviour on power loss - @2hwk (2Cas#1022 on discord)
+1. [PFD] Added the ability to display metric altitudes - @lousybyte (lousybyte)
+1. [ECAM] Added messages related to anti-skid / N.W. steering being off - @Benjozork (Benjamin Dupont)
+1. [CDU] Updated HOLD Page to honeywell spec, PLAN page updated to show holds - @sepiroth887 (sepiroth887)
+1. [FCU] Fixed incrementing the QNH while in hPa mode - @lousybyte (lousybyte)
+1. [CDU] Follow Green Dot speed on approach with flaps clean - @veikkos (Veikko Soininen)
+1. [ND] Fixed cyan heading bug not showing on ND in VOR and LS modes - @AdenFlorian (David Valachovic)
+1. [CDU] Improved the VERT REV page - @lousybyte (lousybyte)
+1. [PFD] Correct PFD attitude indicator onground/inflight - @MMontalto (PiCcy)
+1. [ND] Added WX/TERR on ND brightness knob, fix ND/PFD brightness tooltips - @lukecologne (luke)
 
 ## 2020/09
 1. [General] Add CHANGELOG.md - @nathaninnes (Nathan Innes)
@@ -33,3 +60,4 @@
 1. [ND] Add DME distances, VOR/ADF needles and functioning ADF2 - @blitzcaster (bltzcstr)
 1. [OVHD] Fixed Battery Indicator Colour - @nathaninnes (Nathan Innes)
 1. [MISC] Removed Fuel Patch from MSFS Update 1.8.3 - @nathaninnes (Nathan Innes)
+

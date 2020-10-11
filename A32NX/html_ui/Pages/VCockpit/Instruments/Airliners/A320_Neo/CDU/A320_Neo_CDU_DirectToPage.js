@@ -4,11 +4,10 @@ class CDUDirectToPage {
         let directWaypointCell = " ";
         if (directWaypoint) {
             directWaypointCell = directWaypoint.ident;
-        }
-        else if (mcdu.flightPlanManager.getDirectToTarget()) {
+        } else if (mcdu.flightPlanManager.getDirectToTarget()) {
             directWaypointCell = mcdu.flightPlanManager.getDirectToTarget().ident;
         }
-        let waypointsCell = ["", "", "", "", ""];
+        const waypointsCell = ["", "", "", "", ""];
         let iMax = 5;
         let eraseLabel = "";
         if (directWaypoint) {
@@ -21,7 +20,7 @@ class CDUDirectToPage {
             };
         }
         mcdu.onLeftInput[0] = () => {
-            let value = mcdu.inOut;
+            const value = mcdu.inOut;
             mcdu.clearUserInput();
             mcdu.getOrSelectWaypointByIdent(value, (w) => {
                 if (w) {
@@ -35,8 +34,10 @@ class CDUDirectToPage {
             });
         };
         let i = 0;
-        while (i < mcdu.flightPlanManager.getWaypointsCount() && i + wptsListIndex < mcdu.flightPlanManager.getWaypointsCount() && i < iMax) {
-            let waypoint = mcdu.flightPlanManager.getWaypoint(i + wptsListIndex);
+        wptsListIndex = Math.max(wptsListIndex, mcdu.flightPlanManager.getActiveWaypointIndex());
+        const totalWaypointsCount = mcdu.flightPlanManager.getWaypointsCount() + mcdu.flightPlanManager.getArrivalWaypointsCount() + mcdu.flightPlanManager.getApproachWaypointsCount();
+        while (i < totalWaypointsCount && i + wptsListIndex < totalWaypointsCount && i < iMax) {
+            const waypoint = mcdu.flightPlanManager.getWaypoint(i + wptsListIndex, NaN, true);
             if (waypoint) {
                 waypointsCell[i] = "←" + waypoint.ident + "[color]blue";
                 if (waypointsCell[i]) {
@@ -49,8 +50,7 @@ class CDUDirectToPage {
                         CDUDirectToPage.ShowPage(mcdu, waypoint, wptsListIndex);
                     };
                 }
-            }
-            else {
+            } else {
                 waypointsCell[i] = "----";
             }
             i++;
@@ -87,7 +87,7 @@ class CDUDirectToPage {
         ]);
         mcdu.onUp = () => {
             wptsListIndex++;
-            wptsListIndex = Math.min(wptsListIndex, mcdu.flightPlanManager.getWaypointsCount() - 4);
+            wptsListIndex = Math.min(wptsListIndex, totalWaypointsCount - 5);
             CDUDirectToPage.ShowPage(mcdu, directWaypoint, wptsListIndex);
         };
         mcdu.onDown = () => {
