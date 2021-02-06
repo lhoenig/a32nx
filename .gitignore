@@ -8,6 +8,7 @@
 /A32NX/manifest.json
 /A32NX/build_info.json
 /A32NX/html_ui/Pages/VCockpit/Instruments/generated
+/A32NX/ModelBehaviorDefs/A32NX/generated
 !/docs/**
 !/src/**
 !/scripts/**
@@ -21,7 +22,15 @@
 !.gitattributes
 !.prettierrc.json
 !.prettierignore
+!.npmrc
 !manifest-base.json
 .DS_Store
 node_modules
 /src/sound/.cache
+/src/instruments/src/EFB/dist
+/A32NX/SimObjects/AirPlanes/Asobo_A320_NEO/model/*.gltf
+/A32NX/SimObjects/AirPlanes/Asobo_A320_NEO/model/*.bin
+*.wasm
+/src/systems/target
+/target
+/src/instruments/src/EFB/web/

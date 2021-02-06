@@ -6,8 +6,6 @@ on:
       - synchronize
       - reopened
       - ready_for_review
-    branches:
-      - master
 
 jobs:
   lint:
@@ -17,9 +15,21 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
       - name: install
-        run: npm install
-      - name: lint
+        run: npm install --no-optional
+      - name: npm run lint
         run: ./scripts/dev-env/run.sh npm run lint
+      - name: lint-rust.sh
+        run: |
+          docker run --rm -v "$(pwd)":/external ghcr.io/flybywiresim/dev-env:latest scripts/lint-rust.sh
+  test:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+      - name: test-rust.sh
+        run: |
+          docker run --rm -v "$(pwd)":/external ghcr.io/flybywiresim/dev-env:latest scripts/test-rust.sh
   build:
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false

@@ -72,6 +72,7 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
         this.blueSpeedSVG = null;
         this.blueSpeedText = null;
         this.v1blueSpeedText = null;
+        this.decelText = null;
         this.blueSpeedTextLower = null;
         this.redSpeedSVG = null;
         this.redSpeedText = null;
@@ -81,6 +82,8 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
         this.nextFlapSVGShape = null;
         this.greenDotSVG = null;
         this.greenDotSVGShape = null;
+        this.vRSVG = null;
+        this.vRSVGShape = null;
         this.stripsSVG = null;
         this.vMaxStripSVG = null;
         this.vlsStripSVG = null;
@@ -150,6 +153,19 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
             this.v1blueSpeedText.setAttribute("font-family", "ECAMFontRegular");
             this.v1blueSpeedText.setAttribute("text-anchor", "start");
             this.v1blueSpeedText.setAttribute("alignment-baseline", "central");
+            if (!this.decelText) {
+                this.decelText = document.createElementNS(Avionics.SVG.NS, "text");
+                this.decelText.setAttribute("id", "BlueAirspeedTextLower");
+            } else {
+                Utils.RemoveAllChildren(this.decelText);
+            }
+            this.decelText.setAttribute("x", (posX + 58).toString());
+            this.decelText.setAttribute("y", (posY + height + 17).toString());
+            this.decelText.setAttribute("fill", "#00ff00");
+            this.decelText.setAttribute("font-size", (this.fontSize * 1.5).toString());
+            this.decelText.setAttribute("font-family", "ECAMFontRegular");
+            this.decelText.setAttribute("text-anchor", "end");
+            this.decelText.setAttribute("alignment-baseline", "central");
             if (!this.blueSpeedTextLower) {
                 this.blueSpeedTextLower = document.createElementNS(Avionics.SVG.NS, "text");
                 this.blueSpeedTextLower.setAttribute("id", "BlueAirspeedTextLower");
@@ -206,6 +222,7 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
             this.rootGroup.appendChild(this.v1blueSpeedText);
             this.rootGroup.appendChild(this.blueSpeedText);
             this.rootGroup.appendChild(this.blueSpeedTextLower);
+            this.rootGroup.appendChild(this.decelText);
             this.rootGroup.appendChild(this.redSpeedText);
             this.rootGroup.appendChild(this.redSpeedTextLower);
             this.rootGroup.appendChild(this.speedNotSetSVG);
@@ -369,6 +386,29 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
                 this.greenDotSVGShape.setAttribute("cy", "10");
                 this.greenDotSVGShape.setAttribute("r", "7");
                 this.greenDotSVG.appendChild(this.greenDotSVGShape);
+            }
+            if (!this.vRSVG) {
+                this.vRSVG = document.createElementNS(Avionics.SVG.NS, "svg");
+                this.vRSVG.setAttribute("id", "GreenDotIndicatorGroup");
+            } else {
+                Utils.RemoveAllChildren(this.vRSVG);
+            }
+            this.vRSVG.setAttribute("x", (greenDotPosX + 6).toFixed(0));
+            this.vRSVG.setAttribute("y", (greenDotPosY - greenDotHeight * 0.5).toFixed(0));
+            this.vRSVG.setAttribute("width", greenDotWidth.toFixed(0));
+            this.vRSVG.setAttribute("height", greenDotHeight.toFixed(0));
+            this.vRSVG.setAttribute("viewBox", "0 0 " + greenDotWidth + " " + greenDotHeight);
+            {
+                if (!this.vRSVGShape) {
+                    this.vRSVGShape = document.createElementNS(Avionics.SVG.NS, "circle");
+                }
+                this.vRSVGShape.setAttribute("fill", "none");
+                this.vRSVGShape.setAttribute("stroke", "#00FFFF");
+                this.vRSVGShape.setAttribute("stroke-width", "4");
+                this.vRSVGShape.setAttribute("cx", "10");
+                this.vRSVGShape.setAttribute("cy", "10");
+                this.vRSVGShape.setAttribute("r", "7");
+                this.vRSVG.appendChild(this.vRSVGShape);
             }
             const blueSpeedPosX = _left + _width * 1.025;
             const blueSpeedPosY = _top + _height * 0.5;
@@ -546,6 +586,7 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
             this.centerSVG.appendChild(this.speedMarkerSVG);
             this.centerSVG.appendChild(this.nextFlapSVG);
             this.centerSVG.appendChild(this.greenDotSVG);
+            this.centerSVG.appendChild(this.vRSVG);
         }
         this.rootGroup.appendChild(this.centerSVG);
         {
@@ -637,26 +678,34 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
         this.updateGraduationScrolling(indicatedSpeed);
         const iasAcceleration = this.computeIAS(indicatedSpeed);
         const speedTrend = iasAcceleration;
-        const crossSpeed = SimVar.GetGameVarValue("AIRCRAFT CROSSOVER SPEED", "Knots");
-        const cruiseMach = SimVar.GetGameVarValue("AIRCRAFT CRUISE MACH", "mach");
-        const crossSpeedFactor = Simplane.getCrossoverSpeedFactor(crossSpeed, cruiseMach);
-        const nextFlapSpeed = Simplane.getNextFlapsExtendSpeed(this.aircraft) * crossSpeedFactor;
         // Value used to draw the red VMAX barber pole
-        const maxSpeed = A32NX_Selectors.VMAX();
-        const greenDot = SimVar.GetSimVarValue("L:A32NX_GD", "number");
+        const vMax = SimVar.GetSimVarValue("L:A32NX_SPEEDS_VMAX", "number");
+        const vfeN = SimVar.GetSimVarValue("L:A32NX_SPEEDS_VFEN", "number");
+        const greenDot = SimVar.GetSimVarValue("L:A32NX_SPEEDS_GD", "number");
+        const vR = SimVar.GetSimVarValue("L:AIRLINER_VR_SPEED", "Knots");
         const planeOnGround = Simplane.getIsGrounded();
-        const vs = SimVar.GetSimVarValue("L:A32NX_VS", "number");
-        const vls = SimVar.GetSimVarValue("L:A32NX_VLS", "number");
-        this.smoothSpeeds(indicatedSpeed, dTime, maxSpeed, vls, vs * 1.1, vs * 1.03, vs);
+        const vs = SimVar.GetSimVarValue("L:A32NX_SPEEDS_VS", "number");
+        const vls = SimVar.GetSimVarValue("L:A32NX_SPEEDS_VLS", "number");
+        const autobrakes = SimVar.GetSimVarValue("L:XMLVAR_Autobrakes_Level", "Enum");
+        const flightPhase = Simplane.getCurrentFlightPhase();
+        const decel = planeOnGround
+            && autobrakes !== 0
+            && (autobrakes === 3 ? -6 : -2) > SimVar.GetSimVarValue("A:ACCELERATION BODY Z", "feet per second squared")
+            && ((flightPhase < FlightPhase.FLIGHT_PHASE_CLIMB && autobrakes === 3)
+                || ((flightPhase > FlightPhase.FLIGHT_PHASE_TAKEOFF || flightPhase === FlightPhase.FLIGHT_PHASE_PREFLIGHT)
+                    && autobrakes !== 3 && SimVar.GetSimVarValue("L:A32NX_AUTOBRAKES_BRAKING", "Bool") === 1)
+            );
+        this.smoothSpeeds(indicatedSpeed, dTime, vMax, vls, vs * 1.1, vs * 1.03, vs);
         this.updateSpeedTrendArrow(indicatedSpeed, speedTrend);
-        this.updateTargetSpeeds(indicatedSpeed);
-        this.updateNextFlapSpeedIndicator(indicatedSpeed, nextFlapSpeed);
+        this.updateTargetSpeeds(indicatedSpeed, decel);
+        this.updateNextFlapSpeedIndicator(indicatedSpeed, vfeN);
         this.updateStrip(this.vMaxStripSVG, indicatedSpeed, this._maxSpeed, false, true);
         this.updateStrip(this.vlsStripSVG, indicatedSpeed, this._vls, planeOnGround, false);
         this.updateStrip(this.vaprotStripSVG, indicatedSpeed, this._vaprot, planeOnGround, false);
         this.updateStrip(this.vamaxStripSVG, indicatedSpeed, this._vamax, planeOnGround, false);
         this.updateStrip(this.vsStripSVG, indicatedSpeed, this._vs, planeOnGround, false);
         this.updateGreenDot(indicatedSpeed, greenDot);
+        this.updateVR(indicatedSpeed, vR, planeOnGround);
         this.updateSpeedMarkers(indicatedSpeed);
         this.updateMachSpeed(dTime);
         this.updateSpeedOverride(dTime);
@@ -850,7 +899,7 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
             this.speedTrendArrowSVG.setAttribute("visibility", "visible");
         }
     }
-    updateTargetSpeeds(currentAirspeed) {
+    updateTargetSpeeds(currentAirspeed, _isDecel) {
         {
             let hideV1BlueTextLower = true;
             let v1Speed = 0;
@@ -993,6 +1042,15 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
             takeOffSpeedNotSet = true;
         }
 
+        if (this.decelText) {
+            if (_isDecel) {
+                this.decelText.setAttribute("visibility", "visible");
+                this.decelText.textContent = "DECEL";
+            } else {
+                this.decelText.setAttribute("visibility", "hidden");
+            }
+        }
+
         if (this.speedNotSetSVG) {
             this.speedNotSetSVG.setAttribute("visibility", (takeOffSpeedNotSet) ? "visible" : "hidden");
         }
@@ -1022,7 +1080,7 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
     updateGreenDot(currentAirspeed, _greenDot) {
         if (this.greenDotSVG) {
             let hidePointer = true;
-            if (_greenDot > this.graduationMinValue) {
+            if (Simplane.getFlapsHandleIndex() === 0 && _greenDot > this.graduationMinValue) {
                 const greenDotPosY = this.valueToSvg(currentAirspeed, _greenDot);
                 const greenDotHeight = 20;
                 if (greenDotPosY > 0) {
@@ -1034,6 +1092,24 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
                 this.greenDotSVG.setAttribute("visibility", "hidden");
             } else {
                 this.greenDotSVG.setAttribute("visibility", "visible");
+            }
+        }
+    }
+    updateVR(currentAirspeed, _vR, _onGround) {
+        if (this.vRSVG) {
+            let hidePointer = true;
+            if (_vR > this.graduationMinValue && _onGround && Simplane.getCurrentFlightPhase() === FlightPhase.FLIGHT_PHASE_TAKEOFF) {
+                const vRPosY = this.valueToSvg(currentAirspeed, _vR);
+                const vRHeight = 20;
+                if (vRPosY > 0) {
+                    this.vRSVG.setAttribute("y", (vRPosY - vRHeight * 0.5).toString());
+                    hidePointer = false;
+                }
+            }
+            if (hidePointer) {
+                this.vRSVG.setAttribute("visibility", "hidden");
+            } else {
+                this.vRSVG.setAttribute("visibility", "visible");
             }
         }
     }
@@ -1074,15 +1150,9 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
     }
     updateMarkerF(_marker, currentAirspeed) {
         let hideMarker = true;
-        const phase = Simplane.getCurrentFlightPhase();
         const flapsHandleIndex = Simplane.getFlapsHandleIndex();
-        if (flapsHandleIndex == 2 || (flapsHandleIndex == 3 && !SimVar.GetSimVarValue("L:A32NX_LANDING_CONF3", "boolean"))) {
-            let flapSpeed = 0;
-            if (phase == FlightPhase.FLIGHT_PHASE_TAKEOFF || phase == FlightPhase.FLIGHT_PHASE_CLIMB || phase == FlightPhase.FLIGHT_PHASE_GOAROUND) {
-                flapSpeed = Simplane.getStallSpeedPredicted(flapsHandleIndex - 1) * 1.26;
-            } else if (phase == FlightPhase.FLIGHT_PHASE_DESCENT || phase == FlightPhase.FLIGHT_PHASE_APPROACH) {
-                flapSpeed = SimVar.GetSimVarValue("L:A32NX_FS", "number");
-            }
+        if (flapsHandleIndex === 2 || (flapsHandleIndex === 3 && !SimVar.GetSimVarValue("L:A32NX_SPEEDS_LANDING_CONF3", "boolean"))) {
+            const flapSpeed = SimVar.GetSimVarValue("L:A32NX_SPEEDS_F", "number");
             if (flapSpeed >= 60) {
                 const posY = this.valueToSvg(currentAirspeed, flapSpeed);
                 _marker.svg.setAttribute("y", (posY - this.speedMarkersHeight * 0.5).toString());
@@ -1096,15 +1166,8 @@ class Jet_PFD_AirspeedIndicator extends HTMLElement {
     }
     updateMarkerS(_marker, currentAirspeed) {
         let hideMarker = true;
-        const phase = Simplane.getCurrentFlightPhase();
-        const flapsHandleIndex = Simplane.getFlapsHandleIndex();
-        if (flapsHandleIndex == 1) {
-            let slatSpeed = 0;
-            if (phase == FlightPhase.FLIGHT_PHASE_TAKEOFF || phase == FlightPhase.FLIGHT_PHASE_CLIMB || phase == FlightPhase.FLIGHT_PHASE_GOAROUND) {
-                slatSpeed = Simplane.getStallSpeedPredicted(flapsHandleIndex - 1) * 1.25;
-            } else if (phase == FlightPhase.FLIGHT_PHASE_DESCENT || phase == FlightPhase.FLIGHT_PHASE_APPROACH) {
-                slatSpeed = SimVar.GetSimVarValue("L:A32NX_SS", "number");
-            }
+        if (Simplane.getFlapsHandleIndex() === 1) {
+            const slatSpeed = SimVar.GetSimVarValue("L:A32NX_SPEEDS_S", "number");
             if (slatSpeed >= 60) {
                 const posY = this.valueToSvg(currentAirspeed, slatSpeed);
                 _marker.svg.setAttribute("y", (posY - this.speedMarkersHeight * 0.5).toString());

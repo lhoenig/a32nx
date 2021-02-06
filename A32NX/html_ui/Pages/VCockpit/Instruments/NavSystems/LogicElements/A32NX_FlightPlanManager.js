@@ -348,6 +348,7 @@ class FlightPlanManager {
                         this.decelWaypoint.icao = "";
                         this.decelWaypoint.infos.icao = this.decelWaypoint.icao;
                         this.decelWaypoint.ident = "(DECEL)";
+                        this.decelWaypoint.infos.name = "(DECEL)";
                         this.decelWaypoint.infos.ident = this.decelWaypoint.ident;
                         const decelPosition = this.getCoordinatesAtNMFromDestinationAlongFlightPlan(this._decelDistance);
                         if (decelPosition) {
@@ -574,7 +575,6 @@ class FlightPlanManager {
                     this.instrument.requestCall(callback);
                 });
             });
-            this.instrument.requestCall(callback);
         });
     }
     getOrigin() {

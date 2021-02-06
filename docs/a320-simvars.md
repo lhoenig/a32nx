@@ -1,19 +1,19 @@
 # A320neo Local SimVars
 
 - A32NX_NO_SMOKING_MEMO
-    - Boolean that determines whether the NO SMOKING annunication should be visible on the ECAM memo
-    - Also is used for knowing when to play the no smoking chime sound
-    
+    - Boolean that determines whether the NO SMOKING annunciation should be visible on the ECAM memo
+    - Also is used for knowing when to play the NO SMOKING chime sound
+
 - A32NX_ADIRS_PFD_ALIGNED
     - Bool
     - 0 when ADIRS is not aligned
     - 1 when ADIRS is aligned or 3 minutes after it has started aligning
-    
+
 - A32NX_Neo_ADIRS_START_TIME
     - Seconds
     - Holds the start time in seconds that the ADIRS TIMER will count down from
     - Used to have certain things turn on based on a percentage of the total alignment time
-    
+
 - A32NX_ADIRS_1_FAULT
     - Bool
     - Whether the "FAULT" indication is shown on the OVHD ADIRS panel for ADIRS 1
@@ -25,35 +25,35 @@
 - A32NX_ADIRS_3_FAULT
     - Bool
     - Whether the "FAULT" indication is shown on the OVHD ADIRS panel for ADIRS 3
-    
+
 - A32NX_BRAKE_TEMPERATURE_{1,2,3,4}
     - celsius
     - represents the brake temperature of the rear wheels
-    
+
 - A32NX_BRAKES_HOT
     - boolean
     - whether one of the brakes are hot
-    
+
 - XMLVAR_Auto
     - Used in the `.flt` files to set a default value for the ATC 3 way switch on the TCAS panel
     - Maps to the `I:XMLVAR_Auto` variable which is the actual backing var for the switch
-    
+
 - XMLVAR_ALT_MODE_REQUESTED
     - Used in the `.flt` files to set a default value for the ALT RPTG 2 way switch on the TCAS panel
     - Maps to the `I:XMLVAR_ALT_MODE_REQUESTED` variable which is the actual backing var for the switch
-  
+
 - A32NX_ELEC_COMMERCIAL_TOGGLE
     - Bool
     - True if electrical commercial push button on
-  
+
 - A32NX_ELEC_COMMERCIAL_FAULT
     - Bool
     - True if fault in electrical commercial system
-  
+
 - A32NX_ELEC_GALYCAB_TOGGLE
     - Bool
     - True if electrical galy & cab push button on
-  
+
 - A32NX_ELEC_GALYCAB_FAULT
     - Bool
     - True if fault in electrical galy & cab system
@@ -65,7 +65,7 @@
 - A32NX_KNOB_OVHD_AIRCOND_PACKFLOW_Position
     - Position (0-2)
     - 0 is LO, 1 is NORM, 2 is HI
-  
+
 - A32NX_AIRCOND_PACK1_FAULT
     - Bool
     - True if fault in pack 1
@@ -77,7 +77,7 @@
 - A32NX_AIRCOND_PACK2_FAULT
     - Bool
     - True if fault in pack 2
-  
+
 - A32NX_AIRCOND_PACK2_TOGGLE
     - Bool
     - True if pack 2 is on
@@ -85,11 +85,11 @@
 - A32NX_AIRCOND_HOTAIR_FAULT
     - Bool
     - True if fault in hot air system
-  
+
 - A32NX_AIRCOND_HOTAIR_TOGGLE
     - Bool
     - True if hot air system is on
-  
+
 - A32NX_AIRCOND_RAMAIR_TOGGLE
     - Bool
     - True if ram air is on
@@ -257,24 +257,24 @@
 - A32NX_OVHD_HYD_LEAK_MEASUREMENT_Y_LOCK
     - Bool
     - True if "HYD LEAK MEASUREMENT Y" switch lock is down
-    
+
 - A32NX_LANDING_ELEVATION
     - Number in feet
     - Minimum -2000, maximum 15000
-    
+
 - A32NX_MAN_VS_CONTROL
     - Number, either 0,1 or 2
     - 0 if switch is in up position, 1 if switch is neutral, 2 if switch is down.
-    
+
 - A32NX_CAB_PRESS_MODE_MAN
     - Bool
     - True if CABIN PRESS MODE SEL is in manual mode
-    
+
 - A32NX_CAB_PRESS_SYS_FAULT
     - Bool
     - Determines if the FAULT light on the CABIN PRESS MODE SEL pushbutton
       should be on
-    
+
 - A32NX_DITCHING
     - Bool
     - True if DITCHING mode is enabled
@@ -298,3 +298,205 @@
 - A32NX_FWC_INHIBOVRD
     - Bool
     - True when the FWC decides that flight phase inhibits should be overridden (and ignored)
+
+- A32NX_VSPEEDS_VS
+    - Number
+    - Current config stall speed
+    - is mach corrected
+
+- A32NX_VSPEEDS_VLS
+    - Number
+    - Current config minimum selectable speed
+    - is mach corrected
+
+- A32NX_VSPEEDS_F
+    - Number
+    - F-Speed (approach)
+
+- A32NX_VSPEEDS_S
+    - Number
+    - S-Speed (approach)
+
+- A32NX_VSPEEDS_GD
+    - Number
+    - Green Dot speed (clean config or O)
+    - is mach corrected
+
+
+- A32NX_VSPEEDS_LANDING_CONF3
+    - Bool
+    - True if FLAPS 3 is selected in perf page
+
+- A32NX_VSPEEDS_TO_CONF
+    - Number
+    - Flaps config for TakeOff, 1, 2 or 3
+
+- A32NX_VSPEEDS_V2
+    - Number
+    - TakeOff V2 Speed calculated based on A32NX_VSPEEDS_TO_CONF config
+
+- A32NX_VSPEEDS_VLS_APP
+    - Number
+    - vls calculated for config full whether A32NX_VSPEEDS_LANDING_CONF3 or not
+    - is mach corrected
+
+- A32NX_VSPEEDS_VAPP
+    - Number
+    - vapp calculated for config full  whether A32NX_VSPEEDS_LANDING_CONF3 or not
+    - is mach corrected
+
+- A32NX_TRK_FPA_MODE_ACTIVE
+    - Bool
+    - True if TRK/FPA mode is active
+
+- A32NX_AUTOPILOT_TRACK_SELECTED
+    - Degrees
+    - The selected track in the FCU
+
+- A32NX_AUTOPILOT_FPA_SELECTED
+    - Degrees
+    - The selected flight path angle in the FCU
+
+- A32NX_APU_EGT_CAUTION
+    - Celsius
+    - The APU's exhaust gas temperature caution level, to be indicated in amber in the cockpit
+
+- A32NX_APU_EGT_WARNING
+    - Celsius
+    - The APU's exhaust gas temperature warning level, to be indicated in red in the cockpit
+
+- A32NX_APU_EGT
+    - Celsius
+    - The APU's exhaust gas temperature
+
+- A32NX_APU_N
+    - Percent
+    - The APU's rotations per minute in percentage of the maximum RPM
+
+- A32NX_APU_MASTER_SW_ACTIVATED
+    - Bool
+    - True when the APU MASTER SW is activated
+
+- A32NX_APU_START_ACTIVATED
+    - Bool
+    - True when the APU START push button is activated
+
+- A32NX_APU_GEN_VOLTAGE:
+    - Volts
+    - The electric potential made available by the APU generator
+
+- A32NX_APU_GEN_VOLTAGE_NORMAL:
+    - Bool
+    - Indicates if the APU generator potential is within the normal range
+
+- A32NX_APU_GEN_AMPERAGE:
+    - Amperes
+    - The electric current made available by the APU generator
+
+- A32NX_APU_GEN_FREQ
+    - Hertz
+    - The alternating current frequency of the electric current made available by the APU generator
+
+- A32NX_APU_GEN_FREQ_NORMAL
+    - Bool
+    - Indicates if the APU generator output frequency is within the normal range
+
+- A32NX_APU_START_CONTACTOR_ENERGIZED
+    - Bool
+    - Indicates if the APU START contactor is energized
+
+- A32NX_APU_BLEED_AIR_VALVE_OPEN
+    - Bool
+    - Indicates if the APU bleed air valve is open
+
+- A32NX_APU_BLEED_FAULT
+    - Bool
+    - Indicates if the APU BLEED FAULT light should be illuminated
+
+- A32NX_APU_BLEED_ON
+    - Bool
+    - Indicates if the APU BLEED is ON
+
+- A32NX_APU_MASTER_FAULT
+    - Bool
+    - Indicates if the MASTER SW FAULT light should be illuminated
+
+- A32NX_APU_LOW_FUEL_PRESSURE_FAULT
+    - Bool
+    - Indicates if the APU has an active LOW FUEL PRESSURE fault
+
+- A32NX_APU_IS_AUTO_SHUTDOWN
+    - Bool
+    - Indicates if the APU automatically shut down (for a reason other than fire)
+
+- A32NX_APU_IS_EMERGENCY_SHUTDOWN
+    - Bool
+    - Indicates if the APU automatically shut down due to fire
+
+- A32NX_ECAM_INOP_SYS_APU
+    - Bool
+    - Indicates if the APU is inoperable
+
+- A32NX_APU_FLAP_OPEN_PERCENTAGE
+    - Percent
+    - Indicates the percentage the APU air intake flap is open
+
+- A32NX_APU_FLAP_ECAM_OPEN
+    - Bool
+    - Indicates if the APU air intake flap should be indicated as open on the APU ECAM
+
+- A32NX_FIRE_BUTTON_APU
+    - Bool
+    - Indicates if the APU fire button is released
+
+ - A32NX_RMP_L_TOGGLE_SWITCH
+    - Boolean
+    - Whether the left radio management panel toggle switch is on or off.
+
+- A32NX_RMP_R_TOGGLE_SWITCH
+    - Boolean
+    - Whether the right radio management panel toggle switch is on or off.
+
+- A32NX_RMP_L_SELECTED_MODE
+    - Number
+    - The current mode of the left radio management panel.
+
+- A32NX_RMP_R_SELECTED_MODE
+    - Number
+    - The current mode of the right radio management panel.
+
+- A32NX_RMP_L_VHF2_STANDBY
+    - Hz
+    - The VHF 2 standby frequency for the left RMP.
+
+- A32NX_RMP_L_VHF3_STANDBY
+    - Hz
+    - The VHF 3 standby frequency for the left RMP.
+
+- A32NX_RMP_R_VHF1_STANDBY
+    - Hz
+    - The VHF 1 standby frequency for the right RMP.
+
+- A32NX_RMP_R_VHF3_STANDBY
+    - Hz
+    - The VHF 3 standby frequency for the right RMP.
+
+- A32NX_TO_CONFIG_FLAPS_ENTERED
+    - Bool
+    - True if the pilot has entered a FLAPS value in the PERF TAKE OFF takeoff
+
+- A32NX_TO_CONFIG_FLAPS
+    - Enum
+    - The pilot-entered FLAPS value in the PERF TAKE OFF page. 0 is a valid entry.
+
+- A32NX_TO_CONFIG_THS_ENTERED
+    - Bool
+    - True if the pilot has entered a THS value in the PERF TAKEO FF takeoff
+
+- A32NX_TO_CONFIG_THS
+    - Degrees
+    - The pilot-entered THS value in the PERF TAKE OFF page. 0 is a valid entry.
+  
+- A32NX_ENG_OUT_ACC_ALT
+    - feet
+    - The engine out acceleration altitude, set in the PERF TAKE OFF page.
